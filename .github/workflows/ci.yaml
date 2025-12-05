@@ -1,0 +1,25 @@
+name: Scoop CI
+
+on:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout bucket
+        uses: actions/checkout@v4
+
+      - name: Scoop bucket minion (lint/format/checkhash)
+        uses: ScoopInstaller/GithubActions@main
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          THROW_ERROR: '1'
+
+      - name: Validate manifest and install
+        shell: pwsh
+        run: |
+          scoop bucket add local "$PWD"
+          scoop cache rm wv -a || $true
+          scoop checkhashes wv -dir "$PWD"
+          scoop install wv -dir "$PWD"
