@@ -1,0 +1,28 @@
+{
+    "version": "1.5.19",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/weave-labs/scoop-bucket/releases/download/weave-cli-1.5.19/wv_1.5.19_windows_amd64.zip",
+            "bin": [
+                "wv.exe"
+            ],
+            "hash": "aa0973bba06a98f46d0dfe16ca083f52779ba046d59c309a402a2f0ab6e1904a"
+        }
+    },
+    "homepage": "https://github.com/weave-labs/weave-cli",
+    "license": "FCL-1.0-ALv2",
+    "description": "CLI tool for generating API tests from OpenAPI specifications using LLMs",
+    "persist": [
+        "config"
+    ],
+    "post_install": [
+        "Write-Host 'Weave CLI (wv) has been installed successfully!' -ForegroundColor Green",
+        "Write-Host 'Run ''wv --help'' to get started' -ForegroundColor Yellow"
+    ],
+    "shortcuts": [
+        [
+            "wv.exe",
+            "Weave CLI"
+        ]
+    ]
+}
