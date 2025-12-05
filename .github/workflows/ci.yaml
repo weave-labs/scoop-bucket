@@ -3,6 +3,11 @@ name: Scoop CI
 on:
   pull_request:
 
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
 jobs:
   validate:
     runs-on: windows-latest
@@ -19,7 +24,15 @@ jobs:
       - name: Validate manifest and install
         shell: pwsh
         run: |
+          $manifests = Get-ChildItem bucket -Filter *.json | Select-Object -ExpandProperty BaseName
+          if (-not $manifests) {
+            Write-Host "No manifests found under bucket/; skipping install."
+            exit 0
+          }
+
           scoop bucket add local "$PWD"
-          scoop cache rm wv -a || $true
-          scoop checkhashes wv -dir "$PWD"
-          scoop install wv -dir "$PWD"
+          foreach ($m in $manifests) {
+            scoop cache rm $m -a || $true
+            scoop checkhashes $m -dir "$PWD"
+            scoop install $m -dir "$PWD"
+          }
