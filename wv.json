@@ -1,12 +1,12 @@
 {
-    "version": "1.1.16",
+    "version": "1.5.1",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/weave-labs/weave-cli/releases/download/v1.1.16/wv_1.1.16_windows_amd64.zip",
+            "url": "https://github.com/weave-labs/weave-cli/releases/download/v1.5.1/wv_1.5.1_windows_amd64.zip",
             "bin": [
                 "wv.exe"
             ],
-            "hash": "afc8ccf15f9c944567d9bc4d1f86fe7667da3558cc611cdd7856ced3000f18ae"
+            "hash": "9e0eddd5b7473e4240fab5e48b53c64e14aae107d82e5f31f33826b18b82053c"
         }
     },
     "homepage": "https://github.com/weave-labs/weave-cli",
