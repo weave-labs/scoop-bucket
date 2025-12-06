@@ -23,6 +23,14 @@ jobs:
       - name: Validate manifest and install
         shell: pwsh
         run: |
+          $localShim = Join-Path $env:USERPROFILE "SCOOP\shims"
+          $globalShim = "C:\\SCOOP\\shims"
+          $env:PATH = "$localShim;$globalShim;$env:PATH"
+          if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
+            iwr get.scoop.sh -useb | iex
+            $env:PATH = "$localShim;$globalShim;$env:PATH"
+          }
+
           $manifests = Get-ChildItem bucket -Filter *.json | Select-Object -ExpandProperty BaseName
           if (-not $manifests) {
             Write-Host "No manifests found under bucket/; skipping install."
