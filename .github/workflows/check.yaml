@@ -11,6 +11,8 @@ permissions:
 jobs:
   validate:
     runs-on: windows-latest
+    env:
+      SCOOP_GH_TOKEN: ${{ github.token }}
     steps:
       - name: Checkout bucket
         uses: actions/checkout@v4
@@ -19,19 +21,31 @@ jobs:
         uses: ScoopInstaller/GithubActions@main
         env:
           GITHUB_TOKEN: ${{ github.token }}
+          THROW_ERROR: '1'
+          SCOOP_GH_TOKEN: ${{ github.token }}
 
       - name: Validate manifest and install
         shell: pwsh
         run: |
+          $localShim = Join-Path $env:USERPROFILE "SCOOP\shims"
+          $globalShim = "C:\\SCOOP\\shims"
+          $env:PATH = "$localShim;$globalShim;$env:PATH"
+          $env:GITHUB_TOKEN = "$env:SCOOP_GH_TOKEN"
+          if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) {
+            iwr get.scoop.sh -useb | iex
+            $env:PATH = "$localShim;$globalShim;$env:PATH"
+          }
+
           $manifests = Get-ChildItem bucket -Filter *.json | Select-Object -ExpandProperty BaseName
           if (-not $manifests) {
             Write-Host "No manifests found under bucket/; skipping install."
             exit 0
           }
 
-          scoop bucket add local "$PWD"
+          $bucketPath = (Resolve-Path .).Path -replace '\\','/'
+          $bucketUrl = "file:///$bucketPath"
+          scoop bucket add local $bucketUrl
           foreach ($m in $manifests) {
             scoop cache rm $m -a || $true
-            scoop checkhashes $m -dir "$PWD"
-            scoop install $m -dir "$PWD"
+            scoop install $m
           }
