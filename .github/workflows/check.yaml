@@ -37,9 +37,10 @@ jobs:
             exit 0
           }
 
-          scoop bucket add local "$PWD"
+          $bucketPath = (Resolve-Path .).Path -replace '\\','/'
+          $bucketUrl = "file:///$bucketPath"
+          scoop bucket add local $bucketUrl
           foreach ($m in $manifests) {
             scoop cache rm $m -a || $true
-            scoop checkhashes $m -dir "$PWD"
-            scoop install $m -dir "$PWD"
+            scoop install $m
           }
