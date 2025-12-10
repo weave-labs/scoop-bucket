@@ -14,6 +14,9 @@ jobs:
     env:
       SCOOP_GH_TOKEN: ${{ github.token }}
     steps:
+      - name: Configure RunsOn features
+        uses: runs-on/action@v2
+
       - name: Checkout bucket
         uses: actions/checkout@v4
 
