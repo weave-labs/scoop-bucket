@@ -1,15 +1,15 @@
 {
-  "version": "1.5.28",
+  "version": "1.5.31",
   "architecture": {
     "64bit": {
-      "url": "https://github.com/weave-labs/weave-cli-release/releases/download/v1.5.28/weave-cli_1.5.28_windows_amd64.zip",
+      "url": "https://github.com/weave-labs/weave-cli-release/releases/download/v1.5.31/weave-cli_1.5.31_windows_amd64.zip",
       "bin": [
         "wv.exe"
       ],
-      "hash": "7a2839a1a05b72edb733fe22a498ed0030772695b3fd19d93b0a86097052ded1"
+      "hash": "db28a1662b551a506215fbf1f66490854d88781df360c1dd8202aad818cf44c0"
     }
   },
-  "homepage": "https://github.com/weave-labs/weave-cli",
+  "homepage": "https://github.com/weave-labs/weave-cli-release",
   "license": "FCL-1.0-ALv2",
   "description": "CLI tool for generating API tests from OpenAPI specifications using LLMs",
   "persist": [
@@ -32,7 +32,7 @@
   "autoupdate": {
     "architecture": {
       "64bit": {
-        "url": "https://github.com/weave-labs/weave-cli-release/releases/download/v1.5.28/weave-cli_1.5.28_windows_amd64.zip"
+        "url": "https://github.com/weave-labs/weave-cli-release/releases/download/v1.5.31/weave-cli_1.5.31_windows_amd64.zip"
       }
     }
   }
