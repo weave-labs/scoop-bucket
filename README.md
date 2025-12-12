@@ -2,7 +2,16 @@
 
 This repository contains the [Scoop](https://scoop.sh/) bucket for Weave Labs tools.
 
-## Installation
+## Prerequisites: Install Scoop
+
+Install Scoop (PowerShell):
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+```
+
+## Add This Bucket
 
 To add this bucket to your Scoop installation:
 
@@ -10,24 +19,23 @@ To add this bucket to your Scoop installation:
 scoop bucket add weave-labs https://github.com/weave-labs/scoop-bucket
 ```
 
-## Available Tools
+## Available Manifests
 
-### Weave CLI (wv)
+### Weave CLI (`weave-cli`, binary: `wv`)
 
 CLI tool for generating API tests from OpenAPI specifications using LLMs.
 
 ```powershell
-scoop install weave-labs/wv
+scoop install weave-labs/weave-cli
+wv --help
 ```
 
-## Updating
+## Update / Upgrade
 
-To update the tools in this bucket:
+- Refresh buckets: `scoop update`
+- Upgrade tools from this bucket (example): `scoop update weave-labs/weave-cli`
 
-```powershell
-scoop update
-scoop update wv
-```
+- List buckets to confirm added: `scoop bucket list`
 
 ## License
 
