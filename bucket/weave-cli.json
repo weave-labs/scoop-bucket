@@ -1,28 +1,39 @@
 {
-    "version": "1.5.37",
-    "architecture": {
-        "64bit": {
-            "url": "https://github.com/weave-labs/weave-cli-release/releases/download/v1.5.37/weave-cli_1.5.37_windows_amd64.zip",
-            "bin": [
-                "wv.exe"
-            ],
-            "hash": "146c9402a9ceaad7656e064f1b8c7b384700ef2fb37ad9f8c50c753d59d26630"
-        }
-    },
-    "homepage": "https://github.com/weave-labs/weave-cli-release",
-    "license": "FCL-1.0-ALv2",
-    "description": "CLI tool for generating API tests from OpenAPI specifications using LLMs",
-    "persist": [
-        "config"
-    ],
-    "post_install": [
-        "Write-Host 'Weave CLI (wv) has been installed successfully!' -ForegroundColor Green",
-        "Write-Host 'Run ''wv --help'' to get started' -ForegroundColor Yellow"
-    ],
-    "shortcuts": [
-        [
-            "wv.exe",
-            "Weave CLI"
-        ]
+  "version": "1.5.37",
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/weave-labs/weave-cli-release/releases/download/v1.5.37/weave-cli_1.5.37_windows_amd64.zip",
+      "bin": [
+        "wv.exe"
+      ],
+      "hash": "146c9402a9ceaad7656e064f1b8c7b384700ef2fb37ad9f8c50c753d59d26630"
+    }
+  },
+  "homepage": "https://github.com/weave-labs/weave-cli-release",
+  "license": "FCL-1.0-ALv2",
+  "description": "CLI tool for generating API tests from OpenAPI specifications using LLMs",
+  "persist": [
+    "config"
+  ],
+  "post_install": [
+    "Write-Host 'Weave CLI (wv) has been installed successfully!' -ForegroundColor Green",
+    "Write-Host 'Run ''wv --help'' to get started' -ForegroundColor Yellow"
+  ],
+  "shortcuts": [
+    [
+      "wv.exe",
+      "Weave CLI"
     ]
+  ],
+  "checkver": {
+    "url": "https://github.com/weave-labs/scoop-bucket/releases/latest",
+    "regex": "weave-cli-([0-9.]+)"
+  },
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://github.com/weave-labs/weave-cli-release/releases/download/v1.5.37/weave-cli_1.5.37_windows_amd64.zip"
+      }
+    }
+  }
 }
