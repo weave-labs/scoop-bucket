@@ -18,7 +18,7 @@ jobs:
         uses: runs-on/action@v2
 
       - name: Checkout bucket
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Scoop bucket minion (lint/format/checkhash)
         uses: ScoopInstaller/GithubActions@main
