@@ -15,7 +15,7 @@ jobs:
       SCOOP_GH_TOKEN: ${{ github.token }}
     steps:
       - name: Configure RunsOn features
-        uses: runs-on/action@d141ef83eb66d096ce8afc767e09115a65c63b60 # v2
+        uses: runs-on/action@d141ef83eb66d096ce8afc767e09115a65c63b60 # v2.1.2
 
       - name: Checkout bucket
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
@@ -41,9 +41,11 @@ jobs:
             $env:PATH = "$localShim;$globalShim;$env:PATH"
           }
 
-          $manifests = Get-ChildItem bucket -Filter *.json | Select-Object -ExpandProperty BaseName
+          git fetch --no-tags --depth=1 origin "${{ github.event.pull_request.base.sha }}"
+          $manifests = git diff --name-only "${{ github.event.pull_request.base.sha }}" HEAD -- "bucket/*.json" |
+            ForEach-Object { [System.IO.Path]::GetFileNameWithoutExtension($_) }
           if (-not $manifests) {
-            Write-Host "No manifests found under bucket/; skipping install."
+            Write-Host "No bucket manifests changed; skipping install."
             exit 0
           }
 
