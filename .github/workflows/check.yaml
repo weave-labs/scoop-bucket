@@ -15,13 +15,15 @@ jobs:
       SCOOP_GH_TOKEN: ${{ github.token }}
     steps:
       - name: Configure RunsOn features
-        uses: runs-on/action@v2
+        uses: runs-on/action@d141ef83eb66d096ce8afc767e09115a65c63b60 # v2
 
       - name: Checkout bucket
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: false
 
       - name: Scoop bucket minion (lint/format/checkhash)
-        uses: ScoopInstaller/GithubActions@main
+        uses: ScoopInstaller/GithubActions@63f20efd5d6f876b16fbe2bc95428821b6051c0e # main
         env:
           GITHUB_TOKEN: ${{ github.token }}
           THROW_ERROR: '1'

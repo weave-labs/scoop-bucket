@@ -1,0 +1,16 @@
+name: GitHub Actions lint
+
+on:
+  pull_request:
+    paths:
+      - ".github/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: read
+
+jobs:
+  gh-actions-lint:
+    uses: weave-labs/ci/.github/workflows/gh-actions-lint.yaml@main
