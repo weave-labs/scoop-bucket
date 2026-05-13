@@ -41,9 +41,11 @@ jobs:
             $env:PATH = "$localShim;$globalShim;$env:PATH"
           }
 
-          $manifests = Get-ChildItem bucket -Filter *.json | Select-Object -ExpandProperty BaseName
+          git fetch --no-tags --depth=1 origin "${{ github.event.pull_request.base.sha }}"
+          $manifests = git diff --name-only "${{ github.event.pull_request.base.sha }}" HEAD -- "bucket/*.json" |
+            ForEach-Object { [System.IO.Path]::GetFileNameWithoutExtension($_) }
           if (-not $manifests) {
-            Write-Host "No manifests found under bucket/; skipping install."
+            Write-Host "No bucket manifests changed; skipping install."
             exit 0
           }
 
