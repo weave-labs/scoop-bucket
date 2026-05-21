@@ -23,7 +23,7 @@ jobs:
           persist-credentials: false
 
       - name: Scoop bucket minion (lint/format/checkhash)
-        uses: ScoopInstaller/GithubActions@63f20efd5d6f876b16fbe2bc95428821b6051c0e # main
+        uses: ScoopInstaller/GithubActions@e174c3bef2aeec16a40f2f075cafa167733f0a3e # main
         env:
           GITHUB_TOKEN: ${{ github.token }}
           THROW_ERROR: '1'
